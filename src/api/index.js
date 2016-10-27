@@ -29,7 +29,20 @@ router.get('/v1/brother/:id', function(req, res) {
 
 // Create new brother
 router.post('/v1/brother', function(req, res) {
-    // To-do: Add code for new brother models
+    Brother.create({
+        name: req.body.name,
+        initiation_number: req.body.initiation_number,
+        points: req.body.points,
+        executive_council: req.body.executive_council,
+        coop: req.body.coop,
+        senior: req.body.senior
+    }, function (err, small) {
+        if (err) {
+            return res.status(500).json({ message: err.message });
+        } else {
+            res.json({ message: req.body.name + " was added to the database." });
+        }
+    })
 });
 
 // Delete brother by initiation number

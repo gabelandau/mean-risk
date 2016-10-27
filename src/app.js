@@ -3,7 +3,18 @@
 // Setup dependencies
 var express = require('express');
 var router = require('./api');
-var bodyParser = require('body-parser')
+var bodyParser = require('body-parser');
+require("console-stamp")( console, {
+	metadata: function () {
+    	return ("[risk]");
+	},
+	colors: {
+    	stamp: "yellow",
+    	label: "white",
+    	metadata: "green"
+	},
+    pattern: "dd/mm HH:MM:ss"
+});
 
 // Create express app
 var app = express(); // Create app
@@ -24,5 +35,5 @@ app.use('/api', router);
 
 // Create express listen server
 app.listen(3000, function() {
-    console.log("Server is running on port 3000!");
+    console.log("Server is running on port 3000");
 });
