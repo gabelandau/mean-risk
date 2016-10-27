@@ -1,0 +1,19 @@
+{
+  "name": "treasurer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependenciesgit": {
+    "express": "4.14.0",
+    "mongodb": "2.2.11",
+    "pug": "2.0.0-beta6"
+  },
+  "dependencies": {
+    "mongoose": "4.6.5"
+  }
+}
