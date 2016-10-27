@@ -3,21 +3,23 @@
 // Setup dependencies
 var express = require('express');
 var router = require('./api');
+var bodyParser = require('body-parser')
 
 // Create express app
-var app = express();
+var app = express(); // Create app
+app.use(bodyParser.json()); // Parse POST/PUT request body
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/../views');
 
-// Connect to MongoDB
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/treasurer');
+// Require database connection
+require('./database');
 
-// Routes
+// Index view
 app.get('/', function(req, res) {
     res.render('index');
 });
 
+// Import API routes
 app.use('/api', router);
 
 // Create express listen server
