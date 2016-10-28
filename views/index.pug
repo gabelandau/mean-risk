@@ -1,4 +1,21 @@
+doctype html
 html
     head
         title Risk Management Application
-    body
+        link(type="text/css", rel="stylesheet", href="/node/bulma/css/bulma.css")
+        link(type="text/css", rel="stylesheet", href="/dev/css/style.css")
+        script(type="text/javascript", src="/node/angular/angular.min.js")
+        script(type="text/javascript", src="/dev/js/core.js")
+
+    body(ng-app="risk",ng-controller="brothers")
+        h1.title.is-1 Risk
+
+        table.table.is-bordered
+            thead
+                tr
+                    th Name
+                    th Scroll
+            tbody
+                tr(ng-repeat="x in brothers")
+                    td {{x.name}}
+                    td &#35;{{x.initiation_number}}

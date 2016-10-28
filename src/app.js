@@ -22,6 +22,10 @@ app.use(bodyParser.json()); // Parse POST/PUT request body
 app.set('view engine', 'pug');
 app.set('views', __dirname + '/../views');
 
+// Static dependencies
+app.use('/node', express.static(__dirname + '/../node_modules'));
+app.use('/dev', express.static(__dirname + '/../dev'));
+
 // Require database connection
 require('./database');
 
