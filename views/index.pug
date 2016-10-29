@@ -15,7 +15,15 @@ html
                 tr
                     th Name
                     th Scroll
+                    th Points
+                    th Co-Op?
+                    th Senior?
+                    th EC?
             tbody
                 tr(ng-repeat="x in brothers")
                     td {{x.name}}
                     td &#35;{{x.initiation_number}}
+                    td {{x.points}}
+                    td {{x.coop}}
+                    td {{x.senior}}
+                    td {{x.executive_council}}
