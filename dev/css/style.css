@@ -1,3 +1,16 @@
-body {
+td button {
+    margin: 0 5px 0 5px;
+}
+
+td {
+    vertical-align: middle !important;
+}
+
+box {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+.wrapper {
     padding: 15px;
 }

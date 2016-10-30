@@ -1,29 +1,54 @@
-doctype html
-html
-    head
-        title Risk Management Application
-        link(type="text/css", rel="stylesheet", href="/node/bulma/css/bulma.css")
-        link(type="text/css", rel="stylesheet", href="/dev/css/style.css")
-        script(type="text/javascript", src="/node/angular/angular.min.js")
-        script(type="text/javascript", src="/dev/js/core.js")
+extends layout.pug
 
-    body(ng-app="risk",ng-controller="brothers")
-        h1.title.is-1 Risk
+block title
+    title Risk
 
-        table.table.is-bordered
-            thead
-                tr
-                    th Name
-                    th Scroll
-                    th Points
-                    th Co-Op?
-                    th Senior?
-                    th EC?
-            tbody
-                tr(ng-repeat="x in brothers")
-                    td {{x.name}}
-                    td &#35;{{x.initiation_number}}
-                    td {{x.points}}
-                    td {{x.coop}}
-                    td {{x.senior}}
-                    td {{x.executive_council}}
+block body
+    body(ng-controller="brothers")
+        nav.nav
+            div.nav-left
+                a.nav-item.is-brand Risk
+
+        div.wrapper
+            div.columns
+                div.column
+                    box.box
+                        p hi
+                div.column.is-two-thirds
+                    box.box
+                        table.table.is-striped
+                            thead
+                                tr
+                                    th Scroll
+                                    th Name
+                                    th Point Editor
+                                    th Points
+                                    th Co-Op?
+                                    th Senior?
+                                    th EC?
+                                    th Exempt?
+                            tfoot
+                                tr
+                                    th Scroll
+                                    th Name
+                                    th Point Editor
+                                    th Points
+                                    th Co-Op?
+                                    th Senior?
+                                    th EC?
+                                    th Exempt?
+                            tbody
+                                tr(ng-repeat="x in brothers")
+                                    td &#35;{{x.initiation_number}}
+                                    td {{x.name}}
+                                    td
+                                        button.button.is-info.is-outlined(ng-click="addPoint($index)") Add Point
+                                        button.button.is-info.is-outlined(ng-click="subPoint($index)") Subtract Point
+                                    td {{x.points}}
+                                    td
+                                        input.check(type="checkbox",ng-checked="coop")
+                                    td
+                                        input.check(type="checkbox",ng-checked="x.senior")
+                                    td
+                                        input.check(type="checkbox",ng-checked="executive_council")
+                                    td Nah
