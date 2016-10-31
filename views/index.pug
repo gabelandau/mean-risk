@@ -6,16 +6,17 @@ block title
 block body
     body(ng-controller="brothers")
         nav.nav
-            div.nav-left
-                a.nav-item.is-brand Risk
+            div.nav-center
+                h3.nav-item.title.is-3 Risk Management
 
         div.wrapper
             div.columns
                 div.column
                     box.box
-                        p hi
+                        h4.title.is-4 Brother Manager
+                        button.button.is-primary(ng-click="showAddBrother = true") Add Brother
                 div.column.is-two-thirds
-                    box.box
+                    box.box.brother-box
                         table.table.is-striped
                             thead
                                 tr
@@ -42,8 +43,8 @@ block body
                                     td &#35;{{x.initiation_number}}
                                     td {{x.name}}
                                     td
-                                        button.button.is-info.is-outlined(ng-click="addPoint($index)") Add Point
-                                        button.button.is-info.is-outlined(ng-click="subPoint($index)") Subtract Point
+                                        button.button.is-info.is-outlined(ng-click="addPoint($index)") +
+                                        button.button.is-info.is-outlined(ng-click="subPoint($index)") -
                                     td {{x.points}}
                                     td
                                         input.check(type="checkbox",ng-checked="coop")
@@ -52,3 +53,15 @@ block body
                                     td
                                         input.check(type="checkbox",ng-checked="executive_council")
                                     td Nah
+
+        div.modal(ng-class="{'is-active' : showAddBrother}")
+            div.modal-background
+            div.modal-card
+                header.modal-card-head
+                    p.modal-card-title Add Brother
+                    button.delete(ng-click="showAddBrother = false")
+                section.modal-card-body
+                    p Test
+                footer.modal-card-foot
+                    a.button.is-primary Save
+                    a.button(ng-click="showAddBrother = false") Cancel
