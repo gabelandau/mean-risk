@@ -48,26 +48,45 @@ block body
             div.modal-card
                 header.modal-card-head
                     p.modal-card-title Add Brother
-                    button.delete(ng-click="showAddBrother = false")
+                    button.delete(ng-click="showAddBrother = false; add = null")
                 section.modal-card-body
-                    label.label Name
+                    label.label
+                        | Name
+                        span(style="color:#f00") *
                     p.control
-                        input.input(type="text")
-                    label.label Initiation Number
+                        input.input(ng-model="add.name",type="text")
+
+                    label.label
+                        | Initiation Number
+                        span(style="color:#f00") *
                     p.control
-                        input.input(type="text")
+                        input.input(ng-model="add.initiation_number",type="text")
+
+                    label.label Starting Points
+                    p.control
+                        input.input(ng-model="add.points",type="text")
+
                     p.control
                         label.checkbox
-                            input.add(type="checkbox")
+                            input.add(ng-model="add.executive_council",type="checkbox")
                             | EC?
+
                     p.control
                         label.checkbox
-                            input.add(type="checkbox")
+                            input.add(ng-model="add.coop",type="checkbox")
                             | Co-Op?
+
                     p.control
                         label.checkbox
-                            input.add(type="checkbox")
+                            input.add(ng-model="add.senior",type="checkbox")
                             | Graduating?
+
+                    article.message.is-success(ng-hide="addSuccess")
+                        div.message-header
+                            | Success!
+                        div.message-body
+                            | {{add.name}} was added to the database!
                 footer.modal-card-foot
-                    a.button.is-primary Save
-                    a.button(ng-click="showAddBrother = false") Cancel
+                    a.button.is-primary(ng-click="addBrother()") Save
+                    a.button(ng-click="add = null") Clear Form
+                    a.button(ng-click="showAddBrother = false; add = null") Cancel
