@@ -11,11 +11,11 @@ It is developed in the MEAN stack using:
 * Gulp - Task runner and minifier
 
 ### To-Do's
-* [ ] Finish "add brother" form
-* [ ] Add control functionality
-    * [ ] Control form
-        * [ ] Automatically populated
+* [] Finish "add brother" form
+* [] Add control functionality
+    * [] Control form
+        * [] Automatically populated
     * PUT request handling
-* [ ] API validation
-* [ ] Form validation
-* [ ] Draft
+* [] API validation
+* [] Form validation
+* [] Draft
