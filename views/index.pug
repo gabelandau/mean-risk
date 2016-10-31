@@ -22,29 +22,26 @@ block body
                                 tr
                                     th Scroll
                                     th Name
-                                    th Point Editor
                                     th Points
                                     th Co-Op?
                                     th Senior?
                                     th EC?
                                     th Exempt?
+                                    th Control
                             tfoot
                                 tr
                                     th Scroll
                                     th Name
-                                    th Point Editor
                                     th Points
                                     th Co-Op?
                                     th Senior?
                                     th EC?
                                     th Exempt?
+                                    th Control
                             tbody
                                 tr(ng-repeat="x in brothers")
                                     td &#35;{{x.initiation_number}}
                                     td {{x.name}}
-                                    td
-                                        button.button.is-info.is-outlined(ng-click="addPoint($index)") +
-                                        button.button.is-info.is-outlined(ng-click="subPoint($index)") -
                                     td {{x.points}}
                                     td
                                         input.check(type="checkbox",ng-checked="coop")
@@ -53,6 +50,11 @@ block body
                                     td
                                         input.check(type="checkbox",ng-checked="executive_council")
                                     td Nah
+                                    td
+                                        p.control.has-addons
+                                            a.button.is-info.is-outlined(ng-click="addPoint($index)") +
+                                            a.button.is-info.is-outlined(ng-click="subPoint($index)") -
+                                            a.button.is-danger.is-outlined(ng-click="subPoint($index)") x
 
         div.modal(ng-class="{'is-active' : showAddBrother}")
             div.modal-background
@@ -61,7 +63,24 @@ block body
                     p.modal-card-title Add Brother
                     button.delete(ng-click="showAddBrother = false")
                 section.modal-card-body
-                    p Test
+                    label.label Name
+                    p.control
+                        input.input(type="text")
+                    label.label Initiation Number
+                    p.control
+                        input.input(type="text")
+                    p.control
+                        label.checkbox
+                            input.add(type="checkbox")
+                            | EC?
+                    p.control
+                        label.checkbox
+                            input.add(type="checkbox")
+                            | Co-Op?
+                    p.control
+                        label.checkbox
+                            input.add(type="checkbox")
+                            | Graduating?
                 footer.modal-card-foot
                     a.button.is-primary Save
                     a.button(ng-click="showAddBrother = false") Cancel
