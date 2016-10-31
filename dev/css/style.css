@@ -22,3 +22,7 @@ box.brother-box {
 .add {
     margin: 5px;
 }
+
+.edit {
+    text-align: right;
+}

@@ -23,39 +23,26 @@ block body
                                     th Scroll
                                     th Name
                                     th Points
-                                    th Co-Op?
-                                    th Senior?
-                                    th EC?
                                     th Exempt?
-                                    th Control
+                                    th Chance
+                                    th
                             tfoot
                                 tr
                                     th Scroll
                                     th Name
                                     th Points
-                                    th Co-Op?
-                                    th Senior?
-                                    th EC?
                                     th Exempt?
-                                    th Control
+                                    th Chance
+                                    th
                             tbody
                                 tr(ng-repeat="x in brothers")
                                     td &#35;{{x.initiation_number}}
                                     td {{x.name}}
                                     td {{x.points}}
-                                    td
-                                        input.check(type="checkbox",ng-checked="coop")
-                                    td
-                                        input.check(type="checkbox",ng-checked="x.senior")
-                                    td
-                                        input.check(type="checkbox",ng-checked="executive_council")
                                     td Nah
-                                    td
-                                        p.control.has-addons
-                                            a.button.is-info.is-outlined(ng-click="addPoint($index)") +
-                                            a.button.is-info.is-outlined(ng-click="subPoint($index)") -
-                                            a.button.is-danger.is-outlined(ng-click="subPoint($index)") x
-
+                                    td 0
+                                    td.edit
+                                        button.button.is-outlined.is-info Edit
         div.modal(ng-class="{'is-active' : showAddBrother}")
             div.modal-background
             div.modal-card
