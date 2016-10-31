@@ -11,7 +11,7 @@ It is developed in the MEAN stack using:
 * Gulp - Task runner and minifier
 
 ### To-Do's
-* [ ] Finish "add brother" form
+* [x] Finish "add brother" form
 * [ ] Add control functionality
     * [ ] Control form
         * [ ] Automatically populated
