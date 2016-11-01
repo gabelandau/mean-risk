@@ -1,0 +1,26 @@
+table.table.is-striped
+    thead
+        tr
+            th Scroll
+            th Name
+            th Points
+            th Exempt?
+            th Chance
+            th
+    tfoot
+        tr
+            th Scroll
+            th Name
+            th Points
+            th Exempt?
+            th Chance
+            th
+    tbody
+        tr(ng-repeat="x in brothers")
+            td &#35;{{x.initiation_number}}
+            td {{x.name}}
+            td {{x.points}}
+            td(style="color:#f00") {{x.exempt}}
+            td 0
+            td.edit
+                button.button(ng-click="openEditBrotherForm($index)") Edit

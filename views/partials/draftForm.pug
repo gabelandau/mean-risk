@@ -1,0 +1,24 @@
+box.box
+    h5.title.is-5 Draft
+
+    label.label Sober Monitors
+    p.control
+        input.input(type="text",ng-model="draft.sober")
+
+    label.label Designated Driver
+    p.control
+        input.input(type="text",ng-model="draft.driver")
+
+    label.label Doormen
+    p.control
+        input.input(type="text",ng-model="draft.door")
+
+    label.label Extra
+    p.control
+        input.input(type="text",ng-model="draft.extra")
+
+    div.columns
+        div.column
+            button.button.is-fullwidth Run Draft
+        div.column
+            button.button.is-fullwidth Clear Form

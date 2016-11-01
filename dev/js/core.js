@@ -2,11 +2,19 @@
 app = angular.module('risk', []);
 
 app.controller('brothers', function($scope, $http) {
+    // Default values and variable initialization
     $scope.addSuccess = true;
     $scope.addFail = true;
     $scope.editFail = true;
     $scope.editSuccess = true;
 
+    $scope.draft = [];
+    $scope.draft.sober = 2;
+    $scope.draft.driver = 2;
+    $scope.draft.extra = 0;
+    $scope.draft.door = 1;
+
+    // GET brothers for table
     $http.get('/api/v1/brothers').then(function(response) {
         $scope.brothers = response.data.brothers;
 
@@ -19,26 +27,29 @@ app.controller('brothers', function($scope, $http) {
         }
     });
 
-    $scope.addPoint = function(index) {
-        $scope.brothers[index].points += 1;
-    }
+    // $scope.addPoint = function(index) {
+    //     $scope.brothers[index].points += 1;
+    // }
+    //
+    // $scope.subPoint = function(index) {
+    //     $scope.brothers[index].points -= 1;
+    // }
 
-    $scope.subPoint = function(index) {
-        $scope.brothers[index].points -= 1;
-    }
-
+    // Clears data and messages from add brother form
     $scope.clearAddForm = function() {
         $scope.addSuccess = true;
         $scope.addFail = true;
         $scope.add = null;
     }
 
+    // Clears data and messages from edit brother form
     $scope.clearEditForm = function() {
         $scope.editSuccess = true;
         $scope.editFail = true;
         $scope.edit = null;
     }
 
+    // Add brother to database
     $scope.addBrother = function() {
         $http({
             method: 'post',
@@ -61,6 +72,7 @@ app.controller('brothers', function($scope, $http) {
         });
     }
 
+    // Opens edit brother form and contains functions to edit brothers
     $scope.openEditBrotherForm = function(index) {
         $scope.edit = [];
         $scope.edit.name = $scope.brothers[index].name;
@@ -71,12 +83,14 @@ app.controller('brothers', function($scope, $http) {
         $scope.edit.coop = $scope.brothers[index].coop;
         $scope.showEditForm = true;
 
+        // Delete brother
         $scope.deleteBrother = function() {
             $http.delete('/api/v1/brother/' + $scope.edit.initiation_number).then(function(response) {
                 console.log(response);
             });
         }
 
+        // Edit brother
         $scope.editBrother = function() {
             $http({
                 method: 'put',

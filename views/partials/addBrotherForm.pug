@@ -1,0 +1,55 @@
+div.modal(ng-class="{'is-active' : showAddBrother}")
+    div.modal-background
+    div.modal-card
+        header.modal-card-head
+            p.modal-card-title Add Brother
+            button.delete(ng-click="showAddBrother = false; clearAddForm()")
+        section.modal-card-body
+            p You must refresh the page after submitting this form to see new brothers that were added to the database.
+            br
+            label.label
+                | Name
+                span(style="color:#f00") *
+            p.control
+                input.input(ng-model="add.name",type="text")
+
+            label.label
+                | Initiation Number
+                span(style="color:#f00") *
+            p.control
+                input.input(ng-model="add.initiation_number",type="text")
+
+            label.label Starting Points
+            p.control
+                input.input(ng-model="add.points",type="text")
+
+            p.control
+                label.checkbox
+                    input.add(ng-model="add.executive_council",type="checkbox")
+                    | EC?
+
+            p.control
+                label.checkbox
+                    input.add(ng-model="add.coop",type="checkbox")
+                    | Co-Op?
+
+            p.control
+                label.checkbox
+                    input.add(ng-model="add.senior",type="checkbox")
+                    | Graduating?
+
+            article.message.is-success(ng-hide="addSuccess")
+                div.message-header
+                    | Success!
+                div.message-body
+                    | {{add.name}} was added to the database!
+
+            article.message.is-warning(ng-hide="addFail")
+                div.message-header
+                    | Oops!
+                div.message-body
+                    | Something went wrong. Please check the form and try again.
+        footer.modal-card-foot
+            a.button.is-primary(ng-click="addBrother()") Save
+            a.button(ng-click="clearAddForm()") Clear Form
+            a.button(ng-click="showAddBrother = false; clearAddForm()") Cancel
