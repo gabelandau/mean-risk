@@ -17,6 +17,7 @@ app.controller('brothers', function($scope, $http) {
     // GET brothers for table
     $http.get('/api/v1/brothers').then(function(response) {
         $scope.brothers = response.data.brothers;
+        console.time("concatenation");
 
         for (var x = 0; x < $scope.brothers.length; x++) {
             if ($scope.brothers[x].coop == true || $scope.brothers[x].senior == true || $scope.brothers[x].executive_council == true) {
@@ -25,6 +26,28 @@ app.controller('brothers', function($scope, $http) {
                 $scope.brothers[x].exempt = ""
             }
         }
+
+        $scope.brothers.max_points = 0;
+        for (var x = 0; x < $scope.brothers.length; x++) {
+            if ($scope.brothers[x].points > $scope.brothers.max_points) {
+                $scope.brothers.max_points = $scope.brothers[x].points;
+            }
+        }
+
+        $scope.brothers.total_missed_points = 0;
+        for (var x = 0; x < $scope.brothers.length; x++) {
+            $scope.brothers[x].missed_points = $scope.brothers.max_points - $scope.brothers[x].points;
+            $scope.brothers.total_missed_points += $scope.brothers[x].missed_points
+        }
+
+        for (var x = 0; x < $scope.brothers.length; x++) {
+            $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
+            console.log($scope.brothers[x].chance);
+        }
+
+        console.timeEnd("concatenation");
+        console.log("Max total points: " + $scope.brothers.max_points);
+        console.log("Max missed points: " + $scope.brothers.total_missed_points);
     });
 
     // Adds point to brother
