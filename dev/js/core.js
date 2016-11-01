@@ -4,9 +4,19 @@ app = angular.module('risk', []);
 app.controller('brothers', function($scope, $http) {
     $scope.addSuccess = true;
     $scope.addFail = true;
+    $scope.editFail = true;
+    $scope.editSuccess = true;
 
     $http.get('/api/v1/brothers').then(function(response) {
         $scope.brothers = response.data.brothers;
+
+        for (var x = 0; x < $scope.brothers.length; x++) {
+            if ($scope.brothers[x].coop == true || $scope.brothers[x].senior == true || $scope.brothers[x].executive_council == true) {
+                $scope.brothers[x].exempt = "Yes"
+            } else {
+                $scope.brothers[x].exempt = ""
+            }
+        }
     });
 
     $scope.addPoint = function(index) {
@@ -20,7 +30,13 @@ app.controller('brothers', function($scope, $http) {
     $scope.clearAddForm = function() {
         $scope.addSuccess = true;
         $scope.addFail = true;
-        $scope.add = null;
+        $scope.add.name = null;
+    }
+
+    $scope.clearEditForm = function() {
+        $scope.editSuccess = true;
+        $scope.editFail = true;
+        $scope.edit = null;
     }
 
     $scope.addBrother = function() {
@@ -43,5 +59,43 @@ app.controller('brothers', function($scope, $http) {
                 $scope.addFail = false;
             }
         });
+    }
+
+    $scope.openEditBrotherForm = function(index) {
+        $scope.edit = [];
+        $scope.edit.name = $scope.brothers[index].name;
+        $scope.edit.initiation_number = $scope.brothers[index].initiation_number;
+        $scope.edit.points = $scope.brothers[index].points;
+        $scope.edit.executive_council = $scope.brothers[index].executive_council;
+        $scope.edit.senior = $scope.brothers[index].senior;
+        $scope.edit.coop = $scope.brothers[index].coop;
+        $scope.showEditForm = true;
+
+        $scope.deleteBrother = function() {
+            $http.delete('/api/v1/brother/' + $scope.edit.initiation_number).then(function(response) {
+                console.log(response);
+            });
+        }
+
+        $scope.editBrother = function() {
+            $http({
+                method: 'put',
+                url: '/api/v1/brother/' + $scope.edit.initiation_number,
+                data: {
+                    'name': $scope.edit.name,
+                    'points': $scope.edit.points,
+                    'executive_council': $scope.edit.executive_council,
+                    'coop': $scope.edit.coop,
+                    'senior': $scope.edit.senior
+                }
+            }).
+            then(function(response) {
+                if (response.status == 200) {
+                    $scope.editSuccess = false;
+                } else {
+                    $scope.editFail = false;
+                }
+            });
+        }
     }
 });

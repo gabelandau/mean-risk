@@ -39,10 +39,11 @@ block body
                                     td &#35;{{x.initiation_number}}
                                     td {{x.name}}
                                     td {{x.points}}
-                                    td Nah
+                                    td(style="color:#f00") {{x.exempt}}
                                     td 0
                                     td.edit
-                                        button.button.is-outlined.is-info Edit
+                                        button.button.is-outlined.is-info(ng-click="openEditBrotherForm($index)") Edit
+
         div.modal(ng-class="{'is-active' : showAddBrother}")
             div.modal-background
             div.modal-card
@@ -98,3 +99,55 @@ block body
                     a.button.is-primary(ng-click="addBrother()") Save
                     a.button(ng-click="clearAddForm()") Clear Form
                     a.button(ng-click="showAddBrother = false; clearAddForm()") Cancel
+
+        div.modal(ng-class="{'is-active' : showEditForm}")
+            div.modal-background
+            div.modal-card
+                header.modal-card-head
+                    p.modal-card-title Edit Brother
+                    button.delete(ng-click="showEditForm = false; clearEditForm()")
+                section.modal-card-body
+                    p You must refresh the page after submitting this form to see any changes in the database.
+                    br
+                    label.label Name
+                    p.control
+                        input.input(ng-model="edit.name",type="text")
+
+                    label.label Initiation Number
+                    p.control
+                        input.input(ng-model="edit.initiation_number",type="text")
+
+                    label.label Points
+                    p.control
+                        input.input(ng-model="edit.points",type="text")
+
+                    p.control
+                        label.checkbox
+                            input.add(ng-model="edit.executive_council",type="checkbox")
+                            | EC?
+
+                    p.control
+                        label.checkbox
+                            input.add(ng-model="edit.coop",type="checkbox")
+                            | Co-Op?
+
+                    p.control
+                        label.checkbox
+                            input.add(ng-model="edit.senior",type="checkbox")
+                            | Graduating?
+
+                    article.message.is-success(ng-hide="editSuccess")
+                        div.message-header
+                            | Success!
+                        div.message-body
+                            | {{edit.name}} was edited! Remember to refresh the page to see the changes.
+
+                    article.message.is-warning(ng-hide="editFail")
+                        div.message-header
+                            | Oops!
+                        div.message-body
+                            | Something went wrong. Please check the form and try again.
+                footer.modal-card-foot
+                    a.button.is-primary(ng-click="editBrother()") Save
+                    a.button.is-danger(ng-click="deleteBrother()") Delete Brother
+                    a.button(ng-click="showEditForm = false; clearEditForm()") Cancel

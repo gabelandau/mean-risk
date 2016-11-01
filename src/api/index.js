@@ -45,6 +45,24 @@ router.post('/v1/brother', function(req, res) {
     })
 });
 
+// Update brother by initiation number
+router.put('/v1/brother/:id', function(req, res) {
+    var id = req.params.id;
+
+    Brother.findOneAndUpdate({ 'initiation_number': id }, {
+        name: req.body.name,
+        points: req.body.points,
+        executive_council: req.body.executive_council,
+        coop: req.body.coop,
+        senior: req.body.senior
+    }, function (err, brother) {
+      if (err) {
+          console.log(err);
+      }
+      res.send(brother);
+    });
+});
+
 // Delete brother by initiation number
 router.delete('/v1/brother/:id', function(req, res) {
     var id = req.params.id;
