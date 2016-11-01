@@ -27,13 +27,15 @@ app.controller('brothers', function($scope, $http) {
         }
     });
 
-    // $scope.addPoint = function(index) {
-    //     $scope.brothers[index].points += 1;
-    // }
-    //
-    // $scope.subPoint = function(index) {
-    //     $scope.brothers[index].points -= 1;
-    // }
+    // Adds point to brother
+    $scope.addPoint = function() {
+        $scope.edit.points += 1;
+    }
+
+    // Subtracts point from brother
+    $scope.subPoint = function() {
+        $scope.edit.points -= 1;
+    }
 
     // Clears data and messages from add brother form
     $scope.clearAddForm = function() {
