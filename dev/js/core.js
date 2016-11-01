@@ -30,7 +30,7 @@ app.controller('brothers', function($scope, $http) {
     $scope.clearAddForm = function() {
         $scope.addSuccess = true;
         $scope.addFail = true;
-        $scope.add.name = null;
+        $scope.add = null;
     }
 
     $scope.clearEditForm = function() {
