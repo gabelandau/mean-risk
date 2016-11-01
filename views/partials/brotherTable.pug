@@ -1,26 +1,58 @@
-table.table.is-striped
-    thead
-        tr
-            th Scroll
-            th Name
-            th Points
-            th Exempt?
-            th Chance
-            th
-    tfoot
-        tr
-            th Scroll
-            th Name
-            th Points
-            th Exempt?
-            th Chance
-            th
-    tbody
-        tr(ng-repeat="x in brothers")
-            td &#35;{{x.initiation_number}}
-            td {{x.name}}
-            td {{x.points}}
-            td(style="color:#f00") {{x.exempt}}
-            td {{x.chance}}
-            td.edit
-                button.button(ng-click="openEditBrotherForm($index)") Edit
+
+box.box.brother-box
+    h4.title.is-4.table-header Draftable Brothers
+    table.table.is-striped
+        thead
+            tr
+                th Scroll
+                th Name
+                th Points
+                th Chance
+                th
+        tfoot
+            tr
+                th Scroll
+                th Name
+                th Points
+                th Chance
+                th
+        tbody
+            tr(ng-repeat="x in brothers")
+                td &#35;{{x.initiation_number}}
+                td {{x.name}}
+                td {{x.points}}
+                td {{x.chance}}
+                td.edit
+                    button.button(ng-click="openEditBrotherForm($index)") Edit
+
+box.box.brother-box
+    h4.title.is-4.table-header Exempt Brothers
+    table.table.is-striped
+        thead
+            tr
+                th Scroll
+                th Name
+                th Points
+                th Co-Op?
+                th EC?
+                th Graduating?
+                th
+        tfoot
+            tr
+                th Scroll
+                th Name
+                th Points
+                th Co-Op?
+                th EC?
+                th Graduating?
+                th
+        tbody
+            tr(ng-repeat="x in exempt_brothers")
+                td &#35;{{x.initiation_number}}
+                td {{x.name}}
+                td {{x.points}}
+                td(style="color:#f00") {{x.coop}}
+                td(style="color:#f00") {{x.executive_council}}
+                td(style="color:#f00") {{x.senior}}
+                td.edit
+                    button.button(ng-click="openEditBrotherForm($index)") Edit

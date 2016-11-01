@@ -21,9 +21,40 @@ app.controller('brothers', function($scope, $http) {
 
         for (var x = 0; x < $scope.brothers.length; x++) {
             if ($scope.brothers[x].coop == true || $scope.brothers[x].senior == true || $scope.brothers[x].executive_council == true) {
-                $scope.brothers[x].exempt = "Yes"
+                $scope.brothers[x].exempt = "Yes";
             } else {
-                $scope.brothers[x].exempt = ""
+                $scope.brothers[x].exempt = "";
+            }
+        }
+
+        $scope.exempt_brothers = [];
+        $scope.separateArrays = function() {
+            for (var x = 0; x < $scope.brothers.length; x++) {
+                if ($scope.brothers[x].exempt == "Yes") {
+                    $scope.exempt_brothers.push($scope.brothers[x]);
+                    $scope.brothers.splice(x, 1);
+                    $scope.separateArrays();
+                }
+            }
+        }
+
+        $scope.separateArrays();
+
+        for (var x = 0; x < $scope.exempt_brothers.length; x++) {
+            if ($scope.exempt_brothers[x].coop == true) {
+                $scope.exempt_brothers[x].coop = "Yes";
+            } else {
+                $scope.exempt_brothers[x].coop = "";
+            }
+            if ($scope.exempt_brothers[x].senior == true) {
+                $scope.exempt_brothers[x].senior = "Yes";
+            } else {
+                $scope.exempt_brothers[x].senior = "";
+            }
+            if ($scope.exempt_brothers[x].executive_council == true) {
+                $scope.exempt_brothers[x].executive_council = "Yes";
+            } else {
+                $scope.exempt_brothers[x].executive_council = "";
             }
         }
 
@@ -37,12 +68,11 @@ app.controller('brothers', function($scope, $http) {
         $scope.brothers.total_missed_points = 0;
         for (var x = 0; x < $scope.brothers.length; x++) {
             $scope.brothers[x].missed_points = $scope.brothers.max_points - $scope.brothers[x].points;
-            $scope.brothers.total_missed_points += $scope.brothers[x].missed_points
+            $scope.brothers.total_missed_points += $scope.brothers[x].missed_points;
         }
 
         for (var x = 0; x < $scope.brothers.length; x++) {
             $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
-            console.log($scope.brothers[x].chance);
         }
 
         console.timeEnd("concatenation");

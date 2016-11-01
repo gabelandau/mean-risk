@@ -26,3 +26,7 @@ box.brother-box {
 .edit {
     text-align: right;
 }
+
+.table-header {
+    padding-left: 15px;
+}
