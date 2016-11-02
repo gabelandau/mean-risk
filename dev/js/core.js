@@ -19,27 +19,11 @@ app.controller('brothers', function($scope, $http) {
         $scope.brothers = response.data.brothers;
         console.time("concatenation");
 
-        for (var x = 0; x < $scope.brothers.length; x++) {
-            if ($scope.brothers[x].coop == true || $scope.brothers[x].senior == true || $scope.brothers[x].executive_council == true) {
-                $scope.brothers[x].exempt = "Yes";
-            } else {
-                $scope.brothers[x].exempt = "";
-            }
-        }
+        runExemptions($scope.brothers);
 
         $scope.exempt_brothers = [];
+        separateArrays($scope.brothers, $scope.exempt_brothers);
 
-        $scope.separateArrays = function() {
-            for (var x = 0; x < $scope.brothers.length; x++) {
-                if ($scope.brothers[x].exempt == "Yes") {
-                    $scope.exempt_brothers.push($scope.brothers[x]);
-                    $scope.brothers.splice(x, 1);
-                    $scope.separateArrays();
-                }
-            }
-        }
-
-        $scope.separateArrays();
         shuffle($scope.brothers);
 
         $scope.brothers.sort(function (a, b) {
@@ -48,23 +32,23 @@ app.controller('brothers', function($scope, $http) {
             return 0;
         });
 
-        $scope.brothers.max_points = 0;
-        for (var x = 0; x < $scope.brothers.length; x++) {
-            if ($scope.brothers[x].points > $scope.brothers.max_points) {
-                $scope.brothers.max_points = $scope.brothers[x].points;
-            }
-        }
-
-        $scope.brothers.total_missed_points = 0;
-        for (var x = 0; x < $scope.brothers.length; x++) {
-            $scope.brothers[x].missed_points = $scope.brothers.max_points - $scope.brothers[x].points;
-            $scope.brothers.total_missed_points += $scope.brothers[x].missed_points;
-        }
-
-        for (var x = 0; x < $scope.brothers.length; x++) {
-            $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
-            $scope.brothers[x].chance_display = Math.round(($scope.brothers[x].missed_points / $scope.brothers.total_missed_points) * 1000) / 10;
-        }
+        // $scope.brothers.max_points = 0;
+        // for (var x = 0; x < $scope.brothers.length; x++) {
+        //     if ($scope.brothers[x].points > $scope.brothers.max_points) {
+        //         $scope.brothers.max_points = $scope.brothers[x].points;
+        //     }
+        // }
+        //
+        // $scope.brothers.total_missed_points = 0;
+        // for (var x = 0; x < $scope.brothers.length; x++) {
+        //     $scope.brothers[x].missed_points = $scope.brothers.max_points - $scope.brothers[x].points;
+        //     $scope.brothers.total_missed_points += $scope.brothers[x].missed_points;
+        // }
+        //
+        // for (var x = 0; x < $scope.brothers.length; x++) {
+        //     $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
+        //     $scope.brothers[x].chance_display = Math.round(($scope.brothers[x].missed_points / $scope.brothers.total_missed_points) * 1000) / 10;
+        // }
 
         console.timeEnd("concatenation");
         console.log("Max total points: " + $scope.brothers.max_points);

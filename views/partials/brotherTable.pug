@@ -7,21 +7,21 @@ box.box.brother-box
                 th Scroll
                 th Name
                 th Points
-                th Chance
+                th Draft Order
                 th
         tfoot
             tr
                 th Scroll
                 th Name
                 th Points
-                th Chance
+                th Draft Order
                 th
         tbody
             tr(ng-repeat="x in brothers")
                 td &#35;{{x.initiation_number}}
                 td {{x.name}}
                 td {{x.points}}
-                td {{x.chance_display}}%
+                td Number
                 td.edit
                     button.button(ng-click="openEditBrotherForm('draftable', $index)") Edit
 
