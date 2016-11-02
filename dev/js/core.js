@@ -40,24 +40,6 @@ app.controller('brothers', function($scope, $http) {
 
         $scope.separateArrays();
 
-        for (var x = 0; x < $scope.exempt_brothers.length; x++) {
-            if ($scope.exempt_brothers[x].coop == true) {
-                $scope.exempt_brothers[x].coop = "Yes";
-            } else {
-                $scope.exempt_brothers[x].coop = "";
-            }
-            if ($scope.exempt_brothers[x].senior == true) {
-                $scope.exempt_brothers[x].senior = "Yes";
-            } else {
-                $scope.exempt_brothers[x].senior = "";
-            }
-            if ($scope.exempt_brothers[x].executive_council == true) {
-                $scope.exempt_brothers[x].executive_council = "Yes";
-            } else {
-                $scope.exempt_brothers[x].executive_council = "";
-            }
-        }
-
         $scope.brothers.max_points = 0;
         for (var x = 0; x < $scope.brothers.length; x++) {
             if ($scope.brothers[x].points > $scope.brothers.max_points) {
@@ -73,6 +55,7 @@ app.controller('brothers', function($scope, $http) {
 
         for (var x = 0; x < $scope.brothers.length; x++) {
             $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
+            $scope.brothers[x].chance_display = Math.round(($scope.brothers[x].missed_points / $scope.brothers.total_missed_points) * 1000) / 10;
         }
 
         console.timeEnd("concatenation");
@@ -128,14 +111,25 @@ app.controller('brothers', function($scope, $http) {
     }
 
     // Opens edit brother form and contains functions to edit brothers
-    $scope.openEditBrotherForm = function(index) {
+    $scope.openEditBrotherForm = function(status, index) {
         $scope.edit = [];
-        $scope.edit.name = $scope.brothers[index].name;
-        $scope.edit.initiation_number = $scope.brothers[index].initiation_number;
-        $scope.edit.points = $scope.brothers[index].points;
-        $scope.edit.executive_council = $scope.brothers[index].executive_council;
-        $scope.edit.senior = $scope.brothers[index].senior;
-        $scope.edit.coop = $scope.brothers[index].coop;
+
+        if (status == 'draftable') {
+            $scope.edit.name = $scope.brothers[index].name;
+            $scope.edit.initiation_number = $scope.brothers[index].initiation_number;
+            $scope.edit.points = $scope.brothers[index].points;
+            $scope.edit.executive_council = $scope.brothers[index].executive_council;
+            $scope.edit.senior = $scope.brothers[index].senior;
+            $scope.edit.coop = $scope.brothers[index].coop;
+        } else {
+            $scope.edit.name = $scope.exempt_brothers[index].name;
+            $scope.edit.initiation_number = $scope.exempt_brothers[index].initiation_number;
+            $scope.edit.points = $scope.exempt_brothers[index].points;
+            $scope.edit.executive_council = $scope.exempt_brothers[index].executive_council;
+            $scope.edit.senior = $scope.exempt_brothers[index].senior;
+            $scope.edit.coop = $scope.exempt_brothers[index].coop;
+        }
+
         $scope.showEditForm = true;
 
         // Delete brother

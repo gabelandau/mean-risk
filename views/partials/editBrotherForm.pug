@@ -24,17 +24,17 @@ div.modal(ng-class="{'is-active' : showEditForm}")
 
             p.control
                 label.checkbox
-                    input.add(ng-model="edit.executive_council",type="checkbox")
+                    input.add(ng-model="edit.executive_council",type="checkbox",ng-checked="edit.executive_council == 'Yes'")
                     | EC?
 
             p.control
                 label.checkbox
-                    input.add(ng-model="edit.coop",type="checkbox")
+                    input.add(ng-model="edit.coop",type="checkbox",ng-checked="edit.coop == 'Yes'")
                     | Co-Op?
 
             p.control
                 label.checkbox
-                    input.add(ng-model="edit.senior",type="checkbox")
+                    input.add(ng-model="edit.senior",type="checkbox",ng-checked="edit.senior == 'Yes'")
                     | Graduating?
 
             article.message.is-success(ng-hide="editSuccess")
