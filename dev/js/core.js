@@ -28,6 +28,7 @@ app.controller('brothers', function($scope, $http) {
         }
 
         $scope.exempt_brothers = [];
+
         $scope.separateArrays = function() {
             for (var x = 0; x < $scope.brothers.length; x++) {
                 if ($scope.brothers[x].exempt == "Yes") {
@@ -39,6 +40,13 @@ app.controller('brothers', function($scope, $http) {
         }
 
         $scope.separateArrays();
+        shuffle($scope.brothers);
+
+        $scope.brothers.sort(function (a, b) {
+            if (a.points > b.points) return 1;
+            if (a.points < b.points) return -1;
+            return 0;
+        });
 
         $scope.brothers.max_points = 0;
         for (var x = 0; x < $scope.brothers.length; x++) {
