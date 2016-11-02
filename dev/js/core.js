@@ -1,6 +1,14 @@
 // Angular application
 app = angular.module('risk', []);
 
+/**
+* This is the primary controller for this angular application.
+* It provides functions and calculations for managing the brothers
+* and running the draft system.
+*
+* It also interfaces with the Express API to store and retrieve
+* brother information from the Mongo database.
+*/
 app.controller('brothers', function($scope, $http) {
     // Default values and variable initialization
     $scope.addSuccess = true;
@@ -55,31 +63,7 @@ app.controller('brothers', function($scope, $http) {
         console.log("Max missed points: " + $scope.brothers.total_missed_points);
     });
 
-    // Adds point to brother
-    $scope.addPoint = function() {
-        $scope.edit.points += 1;
-    }
-
-    // Subtracts point from brother
-    $scope.subPoint = function() {
-        $scope.edit.points -= 1;
-    }
-
-    // Clears data and messages from add brother form
-    $scope.clearAddForm = function() {
-        $scope.addSuccess = true;
-        $scope.addFail = true;
-        $scope.add = null;
-    }
-
-    // Clears data and messages from edit brother form
-    $scope.clearEditForm = function() {
-        $scope.editSuccess = true;
-        $scope.editFail = true;
-        $scope.edit = null;
-    }
-
-    // Add brother to database
+    // Add brother to database via POST request
     $scope.addBrother = function() {
         $http({
             method: 'post',
@@ -102,7 +86,11 @@ app.controller('brothers', function($scope, $http) {
         });
     }
 
-    // Opens edit brother form and contains functions to edit brothers
+    /**
+    * This function is used to open a form which allows users
+    * to edit the brothers in the database. It also extends
+    * other functions used in the front-end interface
+    */
     $scope.openEditBrotherForm = function(status, index) {
         $scope.edit = [];
 
@@ -124,14 +112,14 @@ app.controller('brothers', function($scope, $http) {
 
         $scope.showEditForm = true;
 
-        // Delete brother
+        // Delete brother via DELETE request
         $scope.deleteBrother = function() {
             $http.delete('/api/v1/brother/' + $scope.edit.initiation_number).then(function(response) {
                 console.log(response);
             });
         }
 
-        // Edit brother
+        // Edit brother via PUT request
         $scope.editBrother = function() {
             $http({
                 method: 'put',
@@ -152,5 +140,34 @@ app.controller('brothers', function($scope, $http) {
                 }
             });
         }
+    }
+
+    /**
+    *    Front-end functionality
+    *    These functions are used by the pug templates to provide
+    *    a more smooth, easy to use interface.
+    */
+    // Adds point to brother
+    $scope.addPoint = function() {
+        $scope.edit.points += 1;
+    }
+
+    // Subtracts point from brother
+    $scope.subPoint = function() {
+        $scope.edit.points -= 1;
+    }
+
+    // Clears data and messages from add brother form
+    $scope.clearAddForm = function() {
+        $scope.addSuccess = true;
+        $scope.addFail = true;
+        $scope.add = null;
+    }
+
+    // Clears data and messages from edit brother form
+    $scope.clearEditForm = function() {
+        $scope.editSuccess = true;
+        $scope.editFail = true;
+        $scope.edit = null;
     }
 });
