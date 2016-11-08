@@ -74,8 +74,6 @@ app.controller('brothers', function($scope, $http) {
         // }
 
         console.timeEnd("concatenation");
-        console.log("Max total points: " + $scope.brothers.max_points);
-        console.log("Max missed points: " + $scope.brothers.total_missed_points);
     });
 
     // Add brother to database via POST request
@@ -158,26 +156,30 @@ app.controller('brothers', function($scope, $http) {
     }
 
     $scope.runDraft = function() {
-        var sober = $scope.draft.sober;
-        var door = $scope.draft.door;
-        var driver = $scope.draft.driver;
-        var extra = $scope.draft.extra;
+        $scope.drafted = null;
+        $scope.draftStatus = true;
         $scope.drafted = [];
 
-        var total = sober + door + driver + extra;
+        var sober = parseInt($scope.draft.sober);
+        var door = parseInt($scope.draft.door);
+        var driver = parseInt($scope.draft.driver);
+        var extra = parseInt($scope.draft.extra);
 
-        for (var x = 0; x < total; x++) {
+        for (var x = 0; x < (sober + door + driver + extra); x++) {
+            $scope.drafted[x] = $scope.brothers[x].name;
+        }
+
+        shuffle($scope.drafted);
+
+        for (var x = 0; x < $scope.drafted.length; x++) {
             if (x < sober) {
-                $scope.drafted[x] = "Sober Monitor: " + $scope.brothers[x].name;
-            }
-            else if (x < sober + driver) {
-                $scope.drafted[x] = "Driver: " + $scope.brothers[x].name;
-            }
-            else if (x < sober + driver + door) {
-                $scope.drafted[x] = "Doorman: " + $scope.brothers[x].name;
-            }
-            else {
-                $scope.drafted[x] = "Extra: " + $scope.brothers[x].name;
+                $scope.drafted[x] = "Sober Monitor: " + $scope.drafted[x];
+            } else if (x < sober + driver) {
+                $scope.drafted[x] = "Driver: " + $scope.drafted[x];
+            } else if (x < sober + door + driver) {
+                $scope.drafted[x] = "Doorman: " + $scope.drafted[x];
+            } else {
+                $scope.drafted[x] = "Extra: " + $scope.drafted[x];
             }
         }
 
