@@ -12,10 +12,11 @@ It is developed in the MEAN stack using:
 
 ### To-Do's
 * [x] Finish "add brother" form
-* [ ] Add control functionality
-    * [ ] Control form
-        * [ ] Automatically populated
-    * [ ] PUT request handling
+* [x] Add control functionality
+    * [x] Control form
+        * [x] Automatically populated
+        * [ ] Deletion message
+    * [x] PUT request handling
 * [ ] API validation
 * [ ] Form validation
-* [ ] Draft
+* [x] Draft
