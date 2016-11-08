@@ -34,11 +34,6 @@ app.get('/', function(req, res) {
     res.render('index');
 });
 
-// Manage view
-app.get('/manage', function(req, res) {
-    res.render('manage');
-});
-
 // Import API routes
 app.use('/api', router);
 

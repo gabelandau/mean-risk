@@ -55,24 +55,6 @@ app.controller('brothers', function($scope, $http) {
             }
         }
 
-        // $scope.brothers.max_points = 0;
-        // for (var x = 0; x < $scope.brothers.length; x++) {
-        //     if ($scope.brothers[x].points > $scope.brothers.max_points) {
-        //         $scope.brothers.max_points = $scope.brothers[x].points;
-        //     }
-        // }
-        //
-        // $scope.brothers.total_missed_points = 0;
-        // for (var x = 0; x < $scope.brothers.length; x++) {
-        //     $scope.brothers[x].missed_points = $scope.brothers.max_points - $scope.brothers[x].points;
-        //     $scope.brothers.total_missed_points += $scope.brothers[x].missed_points;
-        // }
-        //
-        // for (var x = 0; x < $scope.brothers.length; x++) {
-        //     $scope.brothers[x].chance = $scope.brothers[x].missed_points / $scope.brothers.total_missed_points;
-        //     $scope.brothers[x].chance_display = Math.round(($scope.brothers[x].missed_points / $scope.brothers.total_missed_points) * 1000) / 10;
-        // }
-
         console.timeEnd("concatenation");
     });
 
