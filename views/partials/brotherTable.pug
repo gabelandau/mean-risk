@@ -1,4 +1,3 @@
-
 box.box.brother-box
     h4.title.is-4.table-header Draftable Brothers
     table.table.is-striped
@@ -21,7 +20,7 @@ box.box.brother-box
                 td &#35;{{x.initiation_number}}
                 td {{x.name}}
                 td {{x.points}}
-                td Number
+                td {{x.draft_order}}
                 td.edit
                     button.button(ng-click="openEditBrotherForm('draftable', $index)") Edit
 

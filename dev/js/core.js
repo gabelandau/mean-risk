@@ -15,6 +15,7 @@ app.controller('brothers', function($scope, $http) {
     $scope.addFail = true;
     $scope.editFail = true;
     $scope.editSuccess = true;
+    $scope.draftStatus = true;
 
     $scope.draft = [];
     $scope.draft.sober = 2;
@@ -39,6 +40,20 @@ app.controller('brothers', function($scope, $http) {
             if (a.points < b.points) return -1;
             return 0;
         });
+
+        var tester = $scope.brothers[0].points;
+        var increment = 1;
+
+        for (var x = 0; x < $scope.brothers.length; x++) {
+            if ($scope.brothers[x].points == tester) {
+                $scope.brothers[x].draft_order = increment;
+            }
+            else {
+                tester = $scope.brothers[x].points;
+                increment++;
+                $scope.brothers[x].draft_order = increment;
+            }
+        }
 
         // $scope.brothers.max_points = 0;
         // for (var x = 0; x < $scope.brothers.length; x++) {
@@ -140,6 +155,43 @@ app.controller('brothers', function($scope, $http) {
                 }
             });
         }
+    }
+
+    $scope.runDraft = function() {
+        var sober = $scope.draft.sober;
+        var door = $scope.draft.door;
+        var driver = $scope.draft.driver;
+        var extra = $scope.draft.extra;
+        $scope.drafted = [];
+
+        var total = sober + door + driver + extra;
+
+        for (var x = 0; x < total; x++) {
+            if (x < sober) {
+                $scope.drafted[x] = "Sober Monitor: " + $scope.brothers[x].name;
+            }
+            else if (x < sober + driver) {
+                $scope.drafted[x] = "Driver: " + $scope.brothers[x].name;
+            }
+            else if (x < sober + driver + door) {
+                $scope.drafted[x] = "Doorman: " + $scope.brothers[x].name;
+            }
+            else {
+                $scope.drafted[x] = "Extra: " + $scope.brothers[x].name;
+            }
+        }
+
+        $scope.draftStatus = false;
+    }
+
+    $scope.clearDraft = function() {
+        $scope.draft.sober = 2;
+        $scope.draft.door = 1;
+        $scope.draft.driver = 2;
+        $scope.draft.extra = 0;
+
+        $scope.drafted = null;
+        $scope.draftStatus = true;
     }
 
     /**

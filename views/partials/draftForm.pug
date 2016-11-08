@@ -19,6 +19,13 @@ box.box
 
     div.columns
         div.column
-            button.button.is-fullwidth Run Draft
+            button.button.is-fullwidth(ng-click="runDraft()") Run Draft
         div.column
-            button.button.is-fullwidth Clear Form
+            button.button.is-fullwidth(ng-click="clearDraft()") Clear Form
+
+    article.message.is-info(ng-hide="draftStatus")
+        div.message-header
+            | Draft Results
+        div.message-body
+            ul(ng-repeat="x in drafted")
+                li {{x}}
