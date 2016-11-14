@@ -79,7 +79,7 @@ app.controller('brothers', function($scope, $http) {
                 $scope.addFail = false;
             }
         });
-    }
+    };
 
     /**
     * This function is used to open a form which allows users
@@ -112,7 +112,7 @@ app.controller('brothers', function($scope, $http) {
             $http.delete('/api/v1/brother/' + $scope.edit.initiation_number).then(function(response) {
                 console.log(response);
             });
-        }
+        };
 
         // Edit brother via PUT request
         $scope.editBrother = function() {
@@ -135,7 +135,7 @@ app.controller('brothers', function($scope, $http) {
                 }
             });
         }
-    }
+    };
 
     $scope.runDraft = function() {
         $scope.drafted = null;
@@ -166,7 +166,7 @@ app.controller('brothers', function($scope, $http) {
         }
 
         $scope.draftStatus = false;
-    }
+    };
 
     $scope.clearDraft = function() {
         $scope.draft.sober = 2;
@@ -176,7 +176,7 @@ app.controller('brothers', function($scope, $http) {
 
         $scope.drafted = null;
         $scope.draftStatus = true;
-    }
+    };
 
     /**
     *    Front-end functionality
@@ -186,19 +186,19 @@ app.controller('brothers', function($scope, $http) {
     // Adds point to brother
     $scope.addPoint = function() {
         $scope.edit.points += 1;
-    }
+    };
 
     // Subtracts point from brother
     $scope.subPoint = function() {
         $scope.edit.points -= 1;
-    }
+    };
 
     // Clears data and messages from add brother form
     $scope.clearAddForm = function() {
         $scope.addSuccess = true;
         $scope.addFail = true;
         $scope.add = null;
-    }
+    };
 
     // Clears data and messages from edit brother form
     $scope.clearEditForm = function() {
