@@ -137,6 +137,10 @@ app.controller('brothers', function($scope, $http) {
         }
     };
 
+    $scope.tempExemption = function(index) {
+        $scope.brothers.splice(index, 1);
+    };
+
     $scope.runDraft = function() {
         $scope.drafted = null;
         $scope.draftStatus = true;

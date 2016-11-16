@@ -22,6 +22,7 @@ box.box.brother-box
                 td {{x.points}}
                 td {{x.draft_order}}
                 td.edit
+                    button.button.is-danger(ng-click="tempExemption($index)") Remove
                     button.button(ng-click="openEditBrotherForm('draftable', $index)") Edit
 
 box.box.brother-box
