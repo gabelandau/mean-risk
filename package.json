@@ -8,12 +8,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependenciesgit": {
+  "dependencies": {
     "express": "4.14.0",
     "mongodb": "2.2.11",
-    "pug": "2.0.0-beta6"
-  },
-  "dependencies": {
+    "pug": "2.0.0-beta6",
     "angular": "1.5.8",
     "body-parser": "1.15.2",
     "bulma": "0.2.3",
