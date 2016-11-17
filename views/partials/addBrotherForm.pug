@@ -5,7 +5,7 @@ div.modal(ng-class="{'is-active' : showAddBrother}")
             p.modal-card-title Add Brother
             button.delete(ng-click="showAddBrother = false; clearAddForm()")
         section.modal-card-body
-            p You must refresh the page after submitting this form to see new brothers that were added to the database. Fields with asterick are required, and initiation number can not be left blank.
+            p You must refresh the page after submitting this form to see new brothers that were added to the database. Fields with asterisk are required, and initiation number can not be left blank.
             br
             label.label
                 | Name
@@ -38,17 +38,12 @@ div.modal(ng-class="{'is-active' : showAddBrother}")
                     input.add(ng-model="add.senior",type="checkbox")
                     | Graduating?
 
-            article.message.is-success(ng-hide="addSuccess")
+            article.message.responseMessage(ng-show="showResponseMessage")
                 div.message-header
-                    | Success!
+                    | {{responseMessageHeader}}
                 div.message-body
-                    | {{add.name}} was added to the database!
+                    | {{responseMessageBody}}
 
-            article.message.is-warning(ng-hide="addFail")
-                div.message-header
-                    | Oops!
-                div.message-body
-                    | Something went wrong. Please check the form and try again.
         footer.modal-card-foot
             a.button.is-primary(ng-click="addBrother()") Save
             a.button(ng-click="clearAddForm()") Clear Form

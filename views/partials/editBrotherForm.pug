@@ -37,17 +37,12 @@ div.modal(ng-class="{'is-active' : showEditForm}")
                     input.add(ng-model="edit.senior",type="checkbox",ng-checked="edit.senior == 'Yes'")
                     | Graduating?
 
-            article.message.is-success(ng-hide="editSuccess")
+            article.message.responseMessage(ng-show="showResponseMessage")
                 div.message-header
-                    | Success!
+                    | {{responseMessageHeader}}
                 div.message-body
-                    | {{edit.name}} was edited! Remember to refresh the page to see the changes.
+                    | {{responseMessageBody}}
 
-            article.message.is-warning(ng-hide="editFail")
-                div.message-header
-                    | Oops!
-                div.message-body
-                    | Something went wrong. Please check the form and try again.
         footer.modal-card-foot
             a.button.is-primary(ng-click="editBrother()") Save
             a.button.is-danger(ng-click="deleteBrother()") Delete Brother

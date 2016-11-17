@@ -11,10 +11,7 @@ app = angular.module('risk', []);
 */
 app.controller('brothers', function($scope, $http) {
     // Default values and variable initialization
-    $scope.addSuccess = true;
-    $scope.addFail = true;
-    $scope.editFail = true;
-    $scope.editSuccess = true;
+    $scope.showResponseMessage = false;
     $scope.draftStatus = true;
 
     $scope.draft = [];
@@ -73,10 +70,18 @@ app.controller('brothers', function($scope, $http) {
             }
         }).
         then(function(response) {
+            $scope.showResponseMessage = true;
+
             if (response.status == 200) {
-                $scope.addSuccess = false;
+                angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-danger');
+                angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-success');
+                $scope.responseMessageHeader = "Success!";
+                $scope.responseMessageBody = "Success! " + $scope.add.name + " has been added to the database! Be sure to refresh the page to see your changes.";
             } else {
-                $scope.addFail = false;
+                angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-success');
+                angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-danger');
+                $scope.responseMessageHeader = "Oops!";
+                $scope.responseMessageBody = "Oops! " + $scope.add.name + " was not successfully added to the database. Please check your input and try again.";
             }
         });
     };
@@ -110,7 +115,19 @@ app.controller('brothers', function($scope, $http) {
         // Delete brother via DELETE request
         $scope.deleteBrother = function() {
             $http.delete('/api/v1/brother/' + $scope.edit.initiation_number).then(function(response) {
-                console.log(response);
+                $scope.showResponseMessage = true;
+
+                if (response.status == 200) {
+                    angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-danger');
+                    angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-success');
+                    $scope.responseMessageHeader = "Success!";
+                    $scope.responseMessageBody = "Success! " + $scope.edit.name + " has been deleted from the database! Be sure to refresh the page to see your changes.";
+                } else {
+                    angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-success');
+                    angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-danger');
+                    $scope.responseMessageHeader = "Oops!";
+                    $scope.responseMessageBody = "Oops! " + $scope.edit.name + " was not successfully deleted from the database. Please check your input and try again.";
+                }
             });
         };
 
@@ -128,10 +145,18 @@ app.controller('brothers', function($scope, $http) {
                 }
             }).
             then(function(response) {
+                $scope.showResponseMessage = true;
+
                 if (response.status == 200) {
-                    $scope.editSuccess = false;
+                    angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-danger');
+                    angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-success');
+                    $scope.responseMessageHeader = "Success!";
+                    $scope.responseMessageBody = "Success! " + $scope.edit.name + " has been successfully edited! Be sure to refresh the page to see your changes.";
                 } else {
-                    $scope.editFail = false;
+                    angular.element(document.querySelectorAll( '.responseMessage' )).removeClass('is-success');
+                    angular.element(document.querySelectorAll( '.responseMessage' )).addClass('is-danger');
+                    $scope.responseMessageHeader = "Oops!";
+                    $scope.responseMessageBody = "Oops! " + $scope.edit.name + " was not successfully edited. Please check your input and try again.";
                 }
             });
         }
@@ -199,15 +224,13 @@ app.controller('brothers', function($scope, $http) {
 
     // Clears data and messages from add brother form
     $scope.clearAddForm = function() {
-        $scope.addSuccess = true;
-        $scope.addFail = true;
+        $scope.showResponseMessage = false;
         $scope.add = null;
     };
 
     // Clears data and messages from edit brother form
     $scope.clearEditForm = function() {
-        $scope.editSuccess = true;
-        $scope.editFail = true;
+        $scope.showResponseMessage = false;
         $scope.edit = null;
     }
 });
